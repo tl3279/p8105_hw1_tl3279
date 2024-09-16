@@ -20,8 +20,12 @@ nrow(penguins)
 ncol(penguins)
 mean(penguins$flipper_length_mm, na.rm = TRUE)
 ```
-the data in this dataset, including names / values of important variables
-the size of the dataset (using nrow and ncol)
-the mean flipper length
+The variables in this dataset include species (Adelie, Chinstrap, or Gentoo), island (Biscoe, Dream, or Torgersen),bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex (female, male, or NA), and year (2007, 2008, 0r 2009).
+
+The dataset has 344 rows and 8 columns (344 observations of 8 variables).
+
+The mean flipper length equals to 200.9mm.
+
+
 
 
