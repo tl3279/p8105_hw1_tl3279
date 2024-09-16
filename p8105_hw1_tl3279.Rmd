@@ -9,11 +9,17 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r eval = FALSE}
+library(ggplot2)
+library(palmerpenguins)
+```
+
 ## Problem 1
 
 Load the dataset
 
 ```{r}
+rm(list=ls())
 data("penguins", package = "palmerpenguins")
 summary(penguins)
 nrow(penguins)
@@ -26,6 +32,11 @@ The dataset has 344 rows and 8 columns (344 observations of 8 variables).
 
 The mean flipper length equals to 200.9mm.
 
+```{r}
+plot <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+print(plot)
+ggsave("flipper_vs_bill.png", plot)
+```
 
 
 
