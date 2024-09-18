@@ -2,24 +2,24 @@
 title: "p8105_hw1_tl3279"
 author: "Tianqi Li"
 date: "2024-09-16"
-output: html_document
+output: github?_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE, echo = TRUE)
 ```
 
-```{r eval = FALSE}
+```{r echo = FALSE, message = FALSE}
+# load necessary packages
 library(ggplot2)
-library(palmerpenguins)
+library(tidyverse)
 ```
 
 ## Problem 1
 
-Load the dataset
+Load the dataset and describe it.
 
 ```{r}
-rm(list=ls())
 data("penguins", package = "palmerpenguins")
 summary(penguins)
 nrow(penguins)
@@ -32,11 +32,54 @@ The dataset has 344 rows and 8 columns (344 observations of 8 variables).
 
 The mean flipper length equals to 200.9mm.
 
+Plot and save the plot
 ```{r}
 plot <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 print(plot)
 ggsave("flipper_vs_bill.png", plot)
 ```
 
+## Problem 2
+Create the data frame
+```{r}
+my_df <- tibble(
+  numeric_var = rnorm(10),
+  logical_var = numeric_var > 0,
+  character_var = sample(letters, 10),
+  factor_var = factor(sample(c("Level1", "Level2", "Level3"), 10, replace = TRUE))
+)
+print(my_df)
+```
 
+Calculate the mean for each variable.
+```{r}
+mean_numeric <- mean(pull(my_df, numeric_var))
+mean_logical <- mean(pull(my_df, logical_var))
+mean_character <- mean(pull(my_df, character_var))
+mean_factor <- mean(pull(my_df, factor_var), na.rm = TRUE)
+```
+
+And print out the results.
+
+```{r}
+print(mean_numeric)
+print(mean_logical)
+print(mean_character)
+print(mean_factor)
+```
+
+The mean works for the numerical variable and the logical variable, but not for the character variable or the factor variable.
+
+```{r eval = FALSE}
+numeric_logical <- as.numeric(pull(my_df, logical_var))
+numeric_character <- as.numeric(pull(my_df, character_var))
+numeric_factor <- as.numeric(pull(my_df, factor_var))
+print(numeric_logical)
+print(numeric_character)
+print(numeric_factor)
+mean(numerica_factor)
+```
+as.numeric(logical_var) converts TRUE to 1 and FALSE to 0 which allows to take the mean.
+as.numeric(character_var) will return "NA", since characters can't be directly converted to numbers.
+as.numeric(factor_var) converts factors to their integer codes (e.g., "Level1" = 1, "Level2" = 2, etc.). But the mean function cannot directly compute a factor variable so "NA" is returned. We can compute the mean bu using mean(as.numerica(factor_var)).
 
