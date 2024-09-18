@@ -2,13 +2,10 @@
 title: "p8105_hw1_tl3279"
 author: "Tianqi Li"
 date: "2024-09-16"
-output: github?_document
+output: github_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(warning = FALSE, echo = TRUE)
-```
-
+Load necessary packages
 ```{r echo = FALSE, message = FALSE}
 # load necessary packages
 library(ggplot2)
@@ -33,7 +30,7 @@ The dataset has 344 rows and 8 columns (344 observations of 8 variables).
 The mean flipper length equals to 200.9mm.
 
 Plot and save the plot
-```{r}
+```{r echo = FALSE, fig.keep = "none", fig.show = "hold"}
 plot <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 print(plot)
 ggsave("flipper_vs_bill.png", plot)
@@ -52,7 +49,7 @@ print(my_df)
 ```
 
 Calculate the mean for each variable.
-```{r}
+```{r warning = FALSE}
 mean_numeric <- mean(pull(my_df, numeric_var))
 mean_logical <- mean(pull(my_df, logical_var))
 mean_character <- mean(pull(my_df, character_var))
