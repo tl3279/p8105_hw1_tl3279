@@ -5,9 +5,9 @@ date: "2024-09-16"
 output: github_document
 ---
 
-Load necessary packages
+Load necessary packages, and setup a temporary directory to avoid R Markdown to automatically save the plot for question 1.
 ```{r echo = FALSE, message = FALSE}
-# load necessary packages
+knitr::opts_chunk$set(fig.path = tempdir())
 library(ggplot2)
 library(tidyverse)
 ```
@@ -30,10 +30,10 @@ The dataset has 344 rows and 8 columns (344 observations of 8 variables).
 The mean flipper length equals to 200.9mm.
 
 Plot and save the plot
-```{r echo = FALSE, fig.keep = "none", fig.show = "hold"}
-plot <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
-print(plot)
-ggsave("flipper_vs_bill.png", plot)
+```{r warning = FALSE}
+scatter_plot <- ggplot(penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+print(scatter_plot)
+ggsave("flipper_vs_bill.png", scatter_plot,path = getwd())
 ```
 
 ## Problem 2
